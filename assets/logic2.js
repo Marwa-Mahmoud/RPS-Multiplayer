@@ -24,7 +24,8 @@
   var choices = ["Rock", "Paper", "Scissors"];
 
 
-
+var user = database.auth().currentUser;
+console.log(user);
 
 var restartRound = function(){
 
@@ -53,10 +54,8 @@ $("#start-btn").on("click", function(event){
 
  	player.name = $("#name").val().trim();
 
-    var con = playersRef.child((playersNum+1).toString()).set(player);
+    playersRef.child((playersNum+1).toString()).set(player);
 
-    console.log(con);
-     con.onDisconnect().remove();
 
     $("#turn").data("value", playersNum);
 
@@ -68,6 +67,8 @@ $("#start-btn").on("click", function(event){
 
     
 });
+
+
 
 
 playersRef.on("child_added", function(snapshot, prevChildName){
